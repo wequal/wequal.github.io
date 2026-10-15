@@ -1,0 +1,89 @@
+# Apps published (or being published) on the App Store.
+# Each entry drives <slug>/index.md, <slug>/privacy.md and <slug>/support.md
+# via the shared templates in _includes/.
+#
+# Flags used by _includes/privacy-policy.html:
+#   collects_data      - true if anything leaves the device (other than to a server the user owns)
+#   self_hosted_server - true if the app only talks to a server the user runs themselves
+#   analytics          - true to render the "Analytics and crash reports" section
+#   analytics_provider - name of the SDK/service (e.g. "TelemetryDeck", "Firebase Crashlytics")
+#   cloud_upload       - true to render the "Cloud processing" section
+#   cloud_provider     - name of the service recordings/transcripts are sent to
+#   permissions        - list of iOS permissions the app asks for, with why
+#   policy_updated     - YYYY-MM-DD shown as the effective date of the privacy policy
+
+- slug: wepaint
+  name: WePaint
+  repo: https://github.com/wequal/wepaint
+  tagline: A Windows 11 Paint-style raster editor for iPhone, iPad and Mac.
+  platforms: [iPhone, iPad, Mac]
+  min_os: iOS 17 / iPadOS 17 / macOS 14
+  app_store_url: ""            # TODO: paste the App Store link once the app is live
+  features:
+    - Pencil, eraser, nine brushes (Apple Pencil pressure aware), flood fill, eyedropper, magnifier
+    - Text tool and 20+ editable shapes with outline / fill options
+    - Rectangle and free-form selection with move, resize, rotate, flip, skew and crop
+    - Layers with opacity, reorder, merge, show / hide
+    - Unlimited undo / redo, pinch zoom 12.5 % to 800 %, gridlines
+    - Open from Photos or Files, paste from clipboard, export PNG / JPEG, share sheet
+  collects_data: false
+  self_hosted_server: false
+  analytics: false              # TODO: set true and fill analytics_provider if WePaint ships with analytics
+  analytics_provider: ""
+  cloud_upload: false
+  cloud_provider: ""
+  permissions:
+    - name: Photos
+      why: Only when you choose to open an image from, or save an image to, your photo library.
+    - name: Files
+      why: Only when you choose to open or export an image through the Files picker.
+  policy_updated: 2026-10-15
+
+- slug: fileshare
+  name: FileShare
+  repo: https://github.com/wequal/fileshare
+  tagline: Browse, upload and stream photos and videos from your own home file server.
+  platforms: [iPhone, iPad]
+  min_os: iOS 17
+  app_store_url: ""            # TODO
+  features:
+    - Connects to the open-source Home Fileshare server running on your own PC or NAS
+    - Per-user folders with read / write permissions managed by the server admin
+    - Fast parallel chunked upload for large videos, streaming download and playback
+    - Works over your local Wi-Fi; no account with any third party required
+  collects_data: false
+  self_hosted_server: true
+  analytics: false              # TODO: set true and fill analytics_provider if FileShare ships with analytics
+  analytics_provider: ""
+  cloud_upload: false
+  cloud_provider: ""
+  permissions:
+    - name: Photos
+      why: To let you pick photos and videos to upload to your server, and to save downloaded media.
+    - name: Local Network
+      why: To discover and connect to the file server on your own Wi-Fi network.
+  policy_updated: 2026-10-15
+
+- slug: callrecorder
+  name: CallRecorder
+  repo: https://github.com/wequal/callrecorder
+  tagline: Record, organise and transcribe your calls and voice memos.
+  platforms: [iPhone]
+  min_os: iOS 17
+  app_store_url: ""            # TODO
+  features:
+    - Record audio and keep recordings organised on your device
+    - Optional transcription of recordings
+    - Export and share recordings through the system share sheet
+  collects_data: true
+  self_hosted_server: false
+  analytics: true               # TODO: confirm, and fill analytics_provider below
+  analytics_provider: "TODO_ANALYTICS_PROVIDER"
+  cloud_upload: true
+  cloud_provider: "TODO_CLOUD_PROVIDER"   # e.g. "OpenAI Whisper API", "Google Cloud Speech-to-Text"
+  permissions:
+    - name: Microphone
+      why: Required to record audio. Recording only happens when you start it.
+    - name: Contacts (optional)
+      why: Only if you choose to label a recording with a contact name. Contact data is not uploaded.
+  policy_updated: 2026-10-15

@@ -1,0 +1,41 @@
+{% comment %}
+Shared support page. Usage: {% include support.html app=app %}
+{% endcomment %}
+{% assign app = include.app %}
+{% assign issues_url = app.repo | append: "/issues" %}
+
+<p class="app-nav">
+  <a href="{{ '/' | append: app.slug | append: '/' | relative_url }}">{{ app.name }}</a> ·
+  <a href="{{ '/' | append: app.slug | append: '/privacy/' | relative_url }}">Privacy policy</a> ·
+  <a href="{{ app.repo }}">Source code</a>
+</p>
+
+<h1>{{ app.name }} Support</h1>
+
+<p>Thanks for using {{ app.name }}. Support is handled publicly on GitHub so that answers help everyone.</p>
+
+<h2>Report a bug or ask a question</h2>
+
+<p><a class="button" href="{{ issues_url }}/new">Open an issue on GitHub</a></p>
+
+<p>Before opening a new issue, please <a href="{{ issues_url }}?q=is%3Aissue">search existing issues</a> in case it has already been reported.</p>
+
+<p>When reporting a bug, include:</p>
+<ul>
+  <li>Your device and OS version (for example iPhone 15, iOS 18.1)</li>
+  <li>The app version (shown in the app's About / Settings screen)</li>
+  <li>What you did, what you expected, and what happened instead</li>
+  <li>A screenshot or screen recording if possible</li>
+</ul>
+
+<h2>Request a feature</h2>
+
+<p>Feature ideas are welcome. <a href="{{ issues_url }}/new">Open an issue</a> describing what you'd like to do and why.</p>
+
+<h2>Privacy</h2>
+
+<p>{{ app.name }} does not require an account. Details about what data the app accesses are in the <a href="{{ '/' | append: app.slug | append: '/privacy/' | relative_url }}">privacy policy</a>.</p>
+
+<h2>Source code</h2>
+
+<p>{{ app.name }} is open source. You can read the code, build it yourself or contribute at <a href="{{ app.repo }}">{{ app.repo | remove: "https://" }}</a>.</p>

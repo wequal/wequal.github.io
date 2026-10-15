@@ -1,0 +1,45 @@
+{% comment %}
+Shared app landing page. Usage: {% include app-page.html app=app %}
+{% endcomment %}
+{% assign app = include.app %}
+
+<p class="app-nav">
+  <a href="{{ '/' | relative_url }}">Home</a> ·
+  <a href="{{ '/' | append: app.slug | append: '/support/' | relative_url }}">Support</a> ·
+  <a href="{{ '/' | append: app.slug | append: '/privacy/' | relative_url }}">Privacy policy</a> ·
+  <a href="{{ app.repo }}">Source code</a>
+</p>
+
+<h1>{{ app.name }}</h1>
+
+<p class="tagline">{{ app.tagline }}</p>
+
+<p class="badges">
+  {% for p in app.platforms %}<span class="badge">{{ p }}</span>{% endfor %}
+  <span class="badge muted">{{ app.min_os }}</span>
+</p>
+
+{% if app.app_store_url and app.app_store_url != "" %}
+<p><a class="button" href="{{ app.app_store_url }}">Download on the App Store</a></p>
+{% else %}
+<p class="muted">Coming soon to the App Store.</p>
+{% endif %}
+
+<h2>Features</h2>
+
+<ul>
+{% for f in app.features %}
+  <li>{{ f }}</li>
+{% endfor %}
+</ul>
+
+{{ include.extra }}
+
+<h2>Links</h2>
+
+<ul>
+  <li><a href="{{ '/' | append: app.slug | append: '/support/' | relative_url }}">Support</a></li>
+  <li><a href="{{ '/' | append: app.slug | append: '/privacy/' | relative_url }}">Privacy policy</a></li>
+  <li><a href="{{ app.repo }}">Source code on GitHub</a></li>
+  <li><a href="{{ app.repo }}/issues">Report a bug</a></li>
+</ul>

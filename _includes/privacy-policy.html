@@ -1,0 +1,105 @@
+{% comment %}
+Shared privacy policy. Usage from a page:
+  {% include privacy-policy.html app=app %}
+where `app` is an entry from site.data.apps.
+{% endcomment %}
+{% assign app = include.app %}
+{% assign issues_url = app.repo | append: "/issues" %}
+
+<p class="app-nav">
+  <a href="{{ '/' | append: app.slug | append: '/' | relative_url }}">{{ app.name }}</a> ·
+  <a href="{{ '/' | append: app.slug | append: '/support/' | relative_url }}">Support</a> ·
+  <a href="{{ app.repo }}">Source code</a>
+</p>
+
+<h1>{{ app.name }} Privacy Policy</h1>
+
+<p><em>Effective date: {{ app.policy_updated | date: "%B %-d, %Y" }}</em></p>
+
+<p>This privacy policy describes how <strong>{{ app.name }}</strong> ("the app"), developed by {{ site.owner.name }} ("I", "me"), handles your information. The short version:</p>
+
+<ul>
+{% if app.collects_data == false and app.self_hosted_server == false and app.analytics == false %}
+  <li>The app works entirely on your device. It does not collect, store or transmit any personal data.</li>
+  <li>There are no accounts, no advertising and no third-party tracking.</li>
+{% elsif app.self_hosted_server %}
+  <li>The app only communicates with a server that <strong>you</strong> (or someone you trust) run on your own network.</li>
+  <li>I never receive your files, credentials or any other data. There are no accounts with me and no advertising.</li>
+{% else %}
+  <li>Recordings and other content you create are stored on your device unless you choose to use an optional online feature.</li>
+  <li>There is no advertising and I do not sell your data.</li>
+{% endif %}
+</ul>
+
+<h2>Information the app accesses on your device</h2>
+
+<p>The app asks for the following system permissions. Each one is requested only when needed, and you can revoke it at any time in <strong>Settings &rsaquo; Privacy &amp; Security</strong>.</p>
+
+<table>
+  <thead><tr><th>Permission</th><th>Why it is needed</th></tr></thead>
+  <tbody>
+  {% for p in app.permissions %}
+    <tr><td><strong>{{ p.name }}</strong></td><td>{{ p.why }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<p>Content you open, create or edit in the app stays in the app's sandbox on your device, or in the location you explicitly choose to save or share it to (for example your photo library, the Files app or another app via the share sheet).</p>
+
+{% if app.self_hosted_server %}
+<h2>Your self-hosted server</h2>
+
+<p>{{ app.name }} is a client for the open-source <a href="{{ app.repo }}">Home Fileshare server</a>. When you sign in, your username and password are sent only to the server address you entered, over your local network. Files you upload or download travel directly between your device and that server. The server is operated by you or by whoever gave you the address; I have no access to it and no visibility into what you store there.</p>
+
+<p>If you use an HTTP (not HTTPS) server address, traffic on your local network is not encrypted. Use HTTPS if your server supports it.</p>
+{% endif %}
+
+{% if app.cloud_upload %}
+<h2>Optional cloud processing</h2>
+
+<p>Some features (for example transcription) can send a recording to an online service for processing. This only happens when you explicitly trigger that feature for a specific recording; nothing is uploaded automatically or in the background.</p>
+
+<p>Audio sent for processing is handled by <strong>{{ app.cloud_provider }}</strong> under their own privacy policy and is used solely to produce the result you requested. I do not retain copies of your recordings or transcripts on any server I control.</p>
+
+<p>If you never use the online features, no recording leaves your device.</p>
+{% endif %}
+
+{% if app.slug == "callrecorder" %}
+<h2>Recording other people</h2>
+
+<p>Laws about recording conversations vary by country and state; many places require the consent of everyone on the call. You are responsible for complying with the laws that apply to you before recording anyone.</p>
+{% endif %}
+
+{% if app.analytics %}
+<h2>Analytics and crash reports</h2>
+
+<p>To understand how the app is used and to fix crashes, the app sends anonymous usage events and crash reports to <strong>{{ app.analytics_provider }}</strong>. This data does not include your recordings, files, contacts or any content you create, and it cannot be used to identify you personally. It consists of information such as the app version, device model, OS version, which screens were used and anonymised crash stack traces.</p>
+{% else %}
+<h2>Analytics</h2>
+
+<p>The app does not include any analytics, crash-reporting or advertising SDKs.</p>
+{% endif %}
+
+<h2>Data I collect</h2>
+
+{% if app.collects_data == false %}
+<p>None. I have no servers for this app and no way to see your data. The only information I may receive is what you voluntarily send me when you contact me for support.</p>
+{% else %}
+<p>Apart from the optional analytics and cloud processing described above, I do not collect any personal information. The only other information I may receive is what you voluntarily send me when you contact me for support.</p>
+{% endif %}
+
+<h2>Data retention and deletion</h2>
+
+<p>Everything the app stores lives on your device. Deleting a recording, image or file inside the app, or deleting the app itself, permanently removes that data from your device. Content you have exported to other apps or saved to your photo library is managed by those apps.</p>
+
+<h2>Children</h2>
+
+<p>The app is not directed at children under 13 and does not knowingly collect any information from them.</p>
+
+<h2>Changes to this policy</h2>
+
+<p>If the way the app handles data changes, this page will be updated and the effective date above will change. Significant changes will also be noted in the App Store release notes.</p>
+
+<h2>Contact</h2>
+
+<p>Questions about privacy can be raised by <a href="{{ issues_url }}">opening an issue on GitHub</a>.</p>

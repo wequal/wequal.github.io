@@ -1,3 +1,28 @@
+title: wequal
+description: Apps and open-source projects by wequal
+url: "https://wequal.github.io"
+baseurl: ""
+repository: wequal/wequal.github.io
+
 theme: jekyll-theme-minimal
-title: Wequal's homepage
-description: my project updates!
+permalink: pretty
+
+# Minimal theme options
+logo: https://avatars.githubusercontent.com/u/20077289?v=4
+show_downloads: false
+
+# Owner info used in privacy / support pages
+owner:
+  name: wequal
+  github: https://github.com/wequal
+  location: San Jose, CA, USA
+
+plugins:
+  - jekyll-github-metadata
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
