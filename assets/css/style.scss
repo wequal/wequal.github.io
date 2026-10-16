@@ -7,6 +7,14 @@
 section { width: 620px; }
 @media print, screen and (max-width: 960px) { section { width: auto; } }
 
+/* Logo: half the sidebar width (header is 270px) */
+header img {
+  max-width: 50%;
+  width: 135px;
+  height: auto;
+  border-radius: 8px;
+}
+
 .app-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
